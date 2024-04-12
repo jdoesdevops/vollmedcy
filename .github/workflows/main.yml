@@ -1,66 +1,47 @@
 name: Cypress Tests
+
 on:
   push:
     branches:
       - jdoesdevops-test
+
 jobs:
-  setup-environment:
-    ## Esse job faz o setup das aplicações como checkout, install etc
+  cypress-run:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Install Dependencies
         run: npm install
+      
       - name: Show DB_ENV
         run: |
-          echo 'DB_ENV: ${{ secrets.DB_ENV }}' > .env
-      - uses: actions/upload-artifact@v4
-        with:
-          name: package-lock.json
-          path: package-lock.json
-  setup-backend:
-    ## Esse job faz o setup das aplicações como checkout, install etc
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup & Start Backend
-        run: cd server && npm install
-  setup-frontend:
-    ## Esse job faz o setup das aplicações como checkout, install etc
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup & Start Frontend
-        run: cd server && npm install
-  cypress-run:
-    ## Esse job faz os testes efetivamente
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-    needs: [setup-environment, setup-backend, setup-frontend]
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: package-lock.json
-          path: package-lock.json
+         echo 'DB_ENV: ${{ secrets.DB_ENV }}' > .env
+      
+      - name: Start Server BackEnd
+        run: |
+          cd server
+          docker-compose up -d
+          npm install 
+          nohup npm start &
+
+      - name: Start Web App FrontEnd
+        run: |
+          cd web
+          npm install
+          nohup npm start &
       - name: Write the cypress.env.json file 📝
-        run: echo '${{ secrets.CYPRESS_ENV_CI }}' > cypress.env.json
+          # use quotes around the secret, as its value
+          # is simply inserted as a string into the command
+        run: |
+          echo '${{ secrets.CYPRESS_ENV_CI }}' > cypress.env.json
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
+
         with:
-          # Aqui você pode adicionar quaisquer outras opções específicas do Cypress, se necessário
-          # Consulte a documentação do GitHub Action do Cypress para mais opções
           browser: chrome
-          record: true
         env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
