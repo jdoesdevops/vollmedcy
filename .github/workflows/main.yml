@@ -26,15 +26,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup & Start Backend
-        run: |
-          cd server
-          pwd
-          npm install
-          npm start &
-      - uses: actions/upload-artifact@v4
-        with:
-          name: package-lock.json
-          path: server/package-lock.json
+        run: cd server && npm install
   setup-frontend:
     ## Esse job faz o setup das aplicações como checkout, install etc
     runs-on: ubuntu-latest
@@ -44,10 +36,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup & Start Frontend
-        run: |
-          cd web
-          npm install
-          npm start &
+        run: cd server && npm install
       - uses: actions/upload-artifact@v4
         with:
           name: package-lock.json
