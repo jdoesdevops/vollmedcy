@@ -21,28 +21,32 @@ jobs:
     strategy:
       fail-fast: false
     steps:
-      - name: Start Backend
-        run: cd server
-        run: npm install
-        run: npm start &
+      - name: Setup & Start Backend
+        run: |
+          cd web
+          SERVER_PATH=$(pwd)
+          npm install
+          npm start &
       - uses: actions/upload-artifact@v4
         with:
           name: package-lock.json
-          path: workspace/server/package-lock.json
+          path: $SERVER_PATH/package-lock.json
   setup-frontend:
     ## Esse job faz o setup das aplicações como checkout, install etc
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
     steps:
-      - name: Start Backend
-        run: cd web
-        run: npm install
-        run: npm start &
+      - name: Setup & Start Frontend
+        run: |
+          cd web
+          WEB_PATH=$(pwd)
+          npm install
+          npm start &
       - uses: actions/upload-artifact@v4
         with:
           name: package-lock.json
-          path: workspace/web/package-lock.json
+          path: $WEB_PATH/package-lock.json
   cypress-run:
     ## Esse job faz os testes efetivamente
     runs-on: ubuntu-latest
