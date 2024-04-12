@@ -24,12 +24,13 @@ jobs:
         #   nohup npm start &
         run: |
           cd server
-          echo "DB_ENV: ${{ secrets.DB_ENV }}" > .env  
+          
           docker-compose up -d
           npm install 
           nohup npm start &
         env:
             SERVER_PORT: 8080
+        
 
       - name: Start Web App FrontEnd
         run: |
@@ -42,11 +43,6 @@ jobs:
           # is simply inserted as a string into the command
         run: |
           echo '${{ secrets.CYPRESS_ENV_CI }}' > cypress.env.json
-        
-      - name: Wait Server
-
-        run: |
-          npx wait-on http://localhost:3000 http://localhost:8080
 
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
