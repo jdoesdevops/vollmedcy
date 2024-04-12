@@ -5,9 +5,6 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   e2e: {
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
-    },
     baseUrl: 'http://localhost:3000',
     supportFile: false,
     video: false,
@@ -15,8 +12,5 @@ module.exports = defineConfig({
     specPattern: [
       "**/*.integration.test.ts"
     ]
-    },
-    projectId: "x3bmp5"
-
-  },
-});
+  }
+})
