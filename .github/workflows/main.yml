@@ -28,7 +28,7 @@ jobs:
           echo '${{ secrets.CYPRESS_ENV_CI }}' > cypress.env.json
       
       - name: Run Cypress Tests
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v11
         with:
           config-file: cypress.config.ts 
         
