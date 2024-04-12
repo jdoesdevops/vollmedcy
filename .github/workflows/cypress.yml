@@ -27,8 +27,9 @@ jobs:
         #   docker-compose up -d
         #   npm install 
         #   nohup npm start &
-        env:
-            SERVER_PORT: 8080
+      - name: Show DB_ENV
+        run: |
+         echo "DB_ENV: ${{ secrets.DB_ENV }}"
         
 
       - name: Start Web App FrontEnd
