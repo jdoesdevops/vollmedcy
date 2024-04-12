@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: npm install
       - name: Show DB_ENV
         run: |
           echo 'DB_ENV: ${{ secrets.DB_ENV }}' > .env
@@ -21,6 +23,8 @@ jobs:
     strategy:
       fail-fast: false
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Setup & Start Backend
         run: |
           cd web
@@ -37,6 +41,8 @@ jobs:
     strategy:
       fail-fast: false
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Setup & Start Frontend
         run: |
           cd web
