@@ -44,8 +44,6 @@ jobs:
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
-          build: npm run build
-          start: npm run start
           wait-on: "http://localhost:8080" # URL to wait before tests
           wait-on-timeout: 300 # How long to wait in seconds
           browser: chrome
