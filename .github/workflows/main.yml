@@ -25,6 +25,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Create artifact dir
+        run: mkdir -p new/server
       - name: Setup & Start Backend
         run: |
           cd server
@@ -34,7 +36,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: package-lock.json
-          path: ~/server/package-lock.json
+          path: new/server/package-lock.json
   setup-frontend:
     ## Esse job faz o setup das aplicações como checkout, install etc
     runs-on: ubuntu-latest
@@ -43,12 +45,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Create artifact dir
+        run: mkdir -p new/web
       - name: Setup & Start Frontend
         run: |
-          echo $GITHUB_ACTION
-          ls $GITHUB_ACTION
           cd web
-          pwd
           npm install
           npm start &
       - name: Export artifact
@@ -57,7 +58,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: package-lock.json
-          path: ~/web/package-lock.json
+          path: new/web/package-lock.json
   cypress-run:
     ## Esse job faz os testes efetivamente
     runs-on: ubuntu-latest
@@ -68,11 +69,11 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: package-lock.json
-          path: workspace/server/package-lock.json
+          path: new/server/package-lock.json
       - uses: actions/download-artifact@v4
         with:
           name: package-lock.json
-          path: workspace/web/package-lock.json
+          path: new/web/package-lock.json
       - name: Write the cypress.env.json file 📝
         run: echo '${{ secrets.CYPRESS_ENV_CI }}' > cypress.env.json
       - name: Run Cypress Tests
