@@ -30,7 +30,8 @@ jobs:
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
-          config: baseUrl=http://localhost:3000
+          config-file: cypress.config.ts 
+        
           # wait-on: "http://localhost:3000" # URL to wait before tests
           # wait-on-timeout: 120 # How long to wait in seconds
           browser: chrome
