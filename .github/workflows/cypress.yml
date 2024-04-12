@@ -17,6 +17,10 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Show DB_ENV
+        run: |
+          echo "DB_ENV: ${{ secrets.DB_ENV }}" > .env
+
       - name: Start Server BackEnd
         # run: |
         #   cd server
