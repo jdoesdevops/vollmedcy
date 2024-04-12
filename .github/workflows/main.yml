@@ -11,34 +11,34 @@ jobs:
     strategy:
       fail-fast: false
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      # - name: Checkout
+      #   uses: actions/checkout@v4
 
-      - name: Install Dependencies
-        run: npm install
+      # - name: Install Dependencies
+      #   run: npm install
       
-      - name: Show DB_ENV
-        run: |
-         echo 'DB_ENV: ${{ secrets.DB_ENV }}' > .env
+      # - name: Show DB_ENV
+      #   run: |
+      #    echo 'DB_ENV: ${{ secrets.DB_ENV }}' > .env
       
-      - name: Start Server BackEnd
-        run: |
-          cd server
-          docker-compose up -d
-          npm install 
-          nohup npm start &
+      # - name: Start Server BackEnd
+      #   run: |
+      #     cd server
+      #     docker-compose up -d
+      #     npm install 
+      #     nohup npm start &
         
 
-      - name: Start Web App FrontEnd
-        run: |
-          cd web
-          npm install
-          nohup npm start &
-      - name: Write the cypress.env.json file 📝
-          # use quotes around the secret, as its value
-          # is simply inserted as a string into the command
-        run: |
-          echo '${{ secrets.CYPRESS_ENV_CI }}' > cypress.env.json
+      # - name: Start Web App FrontEnd
+      #   run: |
+      #     cd web
+      #     npm install
+      #     nohup npm start &
+      # - name: Write the cypress.env.json file 📝
+      #     # use quotes around the secret, as its value
+      #     # is simply inserted as a string into the command
+      #   run: |
+      #     echo '${{ secrets.CYPRESS_ENV_CI }}' > cypress.env.json
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
