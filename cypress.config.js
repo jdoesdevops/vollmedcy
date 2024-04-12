@@ -8,15 +8,13 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    baseUrl:'http://localhost:3000/',
-    video: true,
-    reporter: 'mochawesome',
-    reporterOptions: {
-      reportDir: 'cypress/results',
-      overwrite: false,
-      html: true,
-      json: false,
-      timestamp: "mmddyyyy_HHMMss"
+    baseUrl: 'http://localhost:3000',
+    supportFile: false,
+    video: false,
+    experimentalSessionAndOrigin: true,
+    specPattern: [
+      "**/*.integration.test.ts"
+    ]
     },
     projectId: "x3bmp5"
 
