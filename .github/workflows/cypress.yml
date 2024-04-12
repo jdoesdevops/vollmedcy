@@ -42,9 +42,8 @@ jobs:
         
       - name: Wait Server
 
-        uses: iFaxity/wait-on-action@v1 
-        with: 
-          resource: http://localhost:8080/clinica
+        run: |
+          npx wait-on http://localhost:3000 http://localhost:8080
 
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
