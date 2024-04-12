@@ -30,7 +30,6 @@ jobs:
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
-          start: npm run start-api, npm run start-app
           config: baseUrl=http://localhost:3000
           wait-on: "http://localhost:3000" # URL to wait before tests
           wait-on-timeout: 120 # How long to wait in seconds
