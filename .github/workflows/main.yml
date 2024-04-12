@@ -4,7 +4,7 @@ on:
     branches:
       - jdoesdevops-test
 jobs:
-  setup:
+  setup-environment:
     ## Esse job faz o setup das aplicações como checkout, install etc
     runs-on: ubuntu-latest
     strategy:
@@ -12,28 +12,52 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install Dependencies
-        run: npm install
       - name: Show DB_ENV
         run: |
           echo 'DB_ENV: ${{ secrets.DB_ENV }}' > .env
+  setup-backend:
+    ## Esse job faz o setup das aplicações como checkout, install etc
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
       - name: Start Backend
-        run: |
-          cd server
-          npm install
-          npm start &
-      - name: Start Web App
-        run: |
-          cd web
-          npm install
-          npm start &
+        run: cd server
+        run: npm install
+        run: npm start &
+      - uses: actions/upload-artifact@v4
+        with:
+          name: package-lock.json
+          path: workspace/server/package-lock.json
+  setup-frontend:
+    ## Esse job faz o setup das aplicações como checkout, install etc
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Start Backend
+        run: cd web
+        run: npm install
+        run: npm start &
+      - uses: actions/upload-artifact@v4
+        with:
+          name: package-lock.json
+          path: workspace/web/package-lock.json
   cypress-run:
     ## Esse job faz os testes efetivamente
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-    needs: [setup]
+    needs: [setup-environment, setup-backend, setup-frontend]
     steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: package-lock.json
+          path: workspace/server/package-lock.json
+      - uses: actions/download-artifact@v4
+        with:
+          name: package-lock.json
+          path: workspace/web/package-lock.json
       - name: Write the cypress.env.json file 📝
         run: echo '${{ secrets.CYPRESS_ENV_CI }}' > cypress.env.json
       - name: Run Cypress Tests
