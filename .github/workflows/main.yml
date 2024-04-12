@@ -62,10 +62,6 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: package-lock.json
-          path: server/package-lock.json
-      - uses: actions/download-artifact@v4
-        with:
-          name: package-lock.json
           path: web/package-lock.json
       - name: Write the cypress.env.json file 📝
         run: echo '${{ secrets.CYPRESS_ENV_CI }}' > cypress.env.json
