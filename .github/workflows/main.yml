@@ -27,14 +27,14 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup & Start Backend
         run: |
-          cd web
-          SERVER_PATH=$(pwd)
+          cd server
+          pwd
           npm install
           npm start &
       - uses: actions/upload-artifact@v4
         with:
           name: package-lock.json
-          path: $SERVER_PATH/package-lock.json
+          path: ~/server/package-lock.json
   setup-frontend:
     ## Esse job faz o setup das aplicações como checkout, install etc
     runs-on: ubuntu-latest
@@ -46,13 +46,13 @@ jobs:
       - name: Setup & Start Frontend
         run: |
           cd web
-          WEB_PATH=$(pwd)
+          pwd
           npm install
           npm start &
       - uses: actions/upload-artifact@v4
         with:
           name: package-lock.json
-          path: $WEB_PATH/package-lock.json
+          path: ~/web/package-lock.json
   cypress-run:
     ## Esse job faz os testes efetivamente
     runs-on: ubuntu-latest
