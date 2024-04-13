@@ -19,5 +19,5 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           install: false
-          workingDirectory: web
+          working-directory: web
       
