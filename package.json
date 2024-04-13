@@ -14,7 +14,7 @@
     "start-app": "cd web && react-scripts start"
   }, 
   "devDependencies": {
-    "cypress": "^13.7.2",
+    "cypress": "^13.7.3",
     "eslint": "^8.57.0",
     "eslint-plugin-cypress": "^2.15.1",
     "mochawesome": "^7.1.3"
