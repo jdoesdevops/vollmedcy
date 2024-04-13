@@ -19,5 +19,12 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           install: false
+          start: npm run start
+          working-directory: web
+          runTests: false
+      - name: Run Cypress Tests
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
           working-directory: .
       
