@@ -30,6 +30,7 @@ jobs:
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v5
         with:
+          start: cd web && npm start &
           config-file: cypress.config.ts 
           wait-on: http://localhost:3000 # URL to wait before tests
           record: false
