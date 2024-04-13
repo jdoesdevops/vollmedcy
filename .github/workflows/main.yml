@@ -28,12 +28,11 @@ jobs:
           echo '${{ secrets.CYPRESS_ENV_CI }}' > cypress.env.json
       
       - name: Run Cypress Tests
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v5
         with:
           config-file: cypress.config.ts 
-        
-          # wait-on: "http://localhost:3000" # URL to wait before tests
-          # wait-on-timeout: 120 # How long to wait in seconds
+          wait-on: http://localhost:3000 # URL to wait before tests
+          record: false
           browser: chrome
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
