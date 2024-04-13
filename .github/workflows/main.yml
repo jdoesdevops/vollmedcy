@@ -20,5 +20,6 @@ jobs:
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
-          install: false
+          install: true
           workingDirectory: web
+      
