@@ -4,15 +4,12 @@
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
-  envs: {
-    apiBaseUrl: 'http://127.0.0.1:8080',
-    baseUrl: 'http://127.0.0.1:3000',
-  },
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    baseUrl:'http://localhost:3000/',
+    apiBaseUrl: 'http://127.0.0.1:8080',
+    baseUrl: 'http://127.0.0.1:3000',
     video: true,
     reporter: 'mochawesome',
     reporterOptions: {
