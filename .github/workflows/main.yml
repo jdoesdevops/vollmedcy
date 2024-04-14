@@ -27,7 +27,6 @@ jobs:
         with:
           start: npm start
           working-directory: web
-          install: false
         env:
           DEBUG: '@cypress/github-action'
       
