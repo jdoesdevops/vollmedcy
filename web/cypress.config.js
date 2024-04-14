@@ -14,8 +14,7 @@ module.exports = defineConfig({
     video: true,
     reporter: 'mochawesome',
     reporterOptions: {
-      reportDir: '../cypress/results',
-      mochaFile: '../cypress/results/test-file.html',
+      reportDir: 'cypress/report/mochawesome-report',
       toConsole: true,
       overwrite: false,
       html: true,
