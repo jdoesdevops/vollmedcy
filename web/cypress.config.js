@@ -13,8 +13,10 @@ module.exports = defineConfig({
     video: true,
     reporter: 'mochawesome',
     reporterOptions: {
-      reportDir: 'cypress/results',
-      overwrite: true,
+      reportDir: '../cypress/results',
+      mochaFile: '../cypress/results/test-file.html',
+      toConsole: true,
+      overwrite: false,
       html: true,
       json: false,
       timestamp: "mmddyyyy_HHMMss"
