@@ -11,8 +11,13 @@ jobs:
     strategy:
       fail-fast: false
     steps:
+      - name: Config ipv4
+        run: export NODE_OPTIONS=--dns-result-order=ipv4first
       - name: Checkout
         uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
       - name: Install Dependencies
         run: npm install
       - name: Cypress run
@@ -30,7 +35,7 @@ jobs:
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
-          wait-on: 'http://[::1]:3000'
+          wait-on: 'http://localhost:3000'
           wait-on-timeout: 15
           browser: chrome
           install: false
