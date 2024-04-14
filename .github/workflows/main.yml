@@ -19,12 +19,19 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           start: npm start
+          working-directory: server
+          runTests: false
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          start: npm start
           working-directory: web
           runTests: false
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
-          command: npx cypress run
+          wait-on: 'http://127.0.0.1:3000'
+          wait-on-timeout: 60
           browser: chrome
           install: false
       
