@@ -4,9 +4,11 @@
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
+  envs: {
+    apiBaseUrl: 'http://127.0.0.1:8080',
+    baseUrl: 'http://127.0.0.1:3000',
+  },
   e2e: {
-    apiBaseUrl: 'http://localhost:8080',
-    baseUrl: 'http://localhost:3000',
     supportFile: false,
     video: false,
     experimentalSessionAndOrigin: true,
