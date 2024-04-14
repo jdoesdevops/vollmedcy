@@ -11,25 +11,22 @@ jobs:
     strategy:
       fail-fast: false
     steps:
-      - name: config dns
-        run: sudo echo '127.0.0.1	localhost.localdomain	localhost myhostname' > /etc/hosts
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install Dependencies
         run: npm install
-      - name: Run Cypress Tests
-        uses: cypress-io/github-action@v6
-        with:
-          build: npm run build
-          start: npm run start
-          browser: chrome
-          install: true
-          working-directory: web
+      # - name: Run Cypress Tests
+      #   uses: cypress-io/github-action@v6
+      #   with:
+      #     build: npm run build
+      #     start: npm run start
+      #     browser: chrome
+      #     install: true
+      #     working-directory: web
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
           command: npx cypress run
           browser: chrome
           install: false
-          working-directory: .
       
