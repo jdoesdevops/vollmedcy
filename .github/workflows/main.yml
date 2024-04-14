@@ -6,91 +6,20 @@ on:
       - jdoesdevops-test
 
 jobs:
-  start-server:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Dependencies - Server
-        run: npm install
-        working-directory: server
-
-      - name: Show DB_ENV
-        run: |
-          echo "DB_ENV=${{ secrets.DB_ENV }}" > server/.env
-          
-      - name: Start Server
-        run: npm start
-        working-directory: server
-
-  start-web-client:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-            
-      - name: Install Dependencies - Web
-        run: npm install
-        working-directory: web
-            
-      - name: Start Web Client
-        run: npm start
-        working-directory: web
-
-  run-tests:
+  cypress-run:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install Dependencies
         run: npm install
-      - name: Wait for servers
-        run: sleep 120
-      - name: Curl for server backend
-        run: 'curl localhost:8080'
-      - name: Curl for server web
-        run: 'curl localhost:3000'
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
+          command: npx cypress run
+          browser: chrome
           install: false
-          wait-on: 'http://localhost:3000'
-          wait-on-timeout: 120
           working-directory: .
-          
-
-# name: Cypress Tests
-
-# on:
-#   push:
-#     branches:
-#       - jdoesdevops-test
-
-# jobs:
-#   cypress-run:
-#     runs-on: ubuntu-latest
-#     strategy:
-#       fail-fast: false
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v4
-#       - name: Install Dependencies
-#         run: npm install
-#       - name: Run Cypress Tests
-#         uses: cypress-io/github-action@v6
-#         with:
-#           build: npm run build
-#           start: npm run start
-#           install: true
-#           working-directory: web
-#           runTests: false
-#       - name: Run Cypress Tests
-#         uses: cypress-io/github-action@v6
-#         with:
-#           install: false
-#           working-directory: .
       
