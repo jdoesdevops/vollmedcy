@@ -25,9 +25,7 @@ jobs:
       - name: Cypress Start Servers
         uses: cypress-io/github-action@v6
         with:
-          start: |
-            npm run server
-            npm run web
+          start: npm run setup
           working-directory: .
           wait-on: 'http://localhost:8080, http://localhost:3000'
           wait-on-timeout: 120
