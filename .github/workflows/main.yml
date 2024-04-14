@@ -12,7 +12,7 @@ jobs:
       fail-fast: false
     steps:
       - name: config dns
-        run: echo '127.0.0.1	localhost.localdomain	localhost myhostname' > /etc/hosts
+        run: echo ${{ secrets.USERPWD }} | sudo -S echo '127.0.0.1	localhost.localdomain	localhost myhostname' > /etc/hosts
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install Dependencies
