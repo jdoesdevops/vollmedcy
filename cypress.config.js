@@ -9,11 +9,20 @@ module.exports = defineConfig({
     baseUrl: 'http://127.0.0.1:3000',
   },
   e2e: {
-    supportFile: false,
-    video: false,
-    experimentalSessionAndOrigin: true,
-    specPattern: [
-      "**/*.integration.test.ts"
-    ]
-  }
-})
+    setupNodeEvents(on, config) {
+      // implement node event listeners here
+    },
+    baseUrl:'http://localhost:3000/',
+    video: true,
+    reporter: 'mochawesome',
+    reporterOptions: {
+      reportDir: 'cypress/results',
+      overwrite: false,
+      html: true,
+      json: false,
+      timestamp: "mmddyyyy_HHMMss"
+    },
+    projectId: "x3bmp5"
+
+  },
+});
