@@ -17,16 +17,16 @@ jobs:
         uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 18
       - name: Install Dependencies
         run: npm install
-      - name: Cypress run
+      - name: Cypress Start Server
         uses: cypress-io/github-action@v6
         with:
           start: npm start
           working-directory: server
           runTests: false
-      - name: Cypress run
+      - name: Cypress Start Web
         uses: cypress-io/github-action@v6
         with:
           start: npm start
@@ -35,6 +35,9 @@ jobs:
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
+          wait-on: 'npx wait-on --timeout 60000 http://localhost:3000'
           browser: chrome
           install: false
+        env:
+          DEBUG: '@cypress/github-action'
       
