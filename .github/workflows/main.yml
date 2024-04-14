@@ -49,13 +49,17 @@ jobs:
       - name: Install Dependencies
         run: npm install
       - name: Wait for servers
-        run: sleep 300
+        run: sleep 120
+      - name: Curl for server backend
+        run: 'curl localhost:8080'
+      - name: Curl for server web
+        run: 'curl localhost:3000'
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
           install: false
           wait-on: 'http://localhost:3000'
-          wait-on-timeout: 300
+          wait-on-timeout: 120
           working-directory: .
           
 
