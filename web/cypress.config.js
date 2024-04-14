@@ -5,7 +5,7 @@ const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
   e2e: {
-    supportFile: false,
+    // supportFile: false,
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
@@ -14,7 +14,7 @@ module.exports = defineConfig({
     video: true,
     reporter: 'mochawesome',
     reporterOptions: {
-      reportDir: 'cypress/report/mochawesome-report',
+      reportDir: '../cypress/report/mochawesome-report',
       toConsole: true,
       overwrite: false,
       html: true,

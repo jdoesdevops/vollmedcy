@@ -22,11 +22,24 @@ jobs:
         run: |
           npm prune
           npm install
-      - name: Cypress Start Web
+      # - name: Cypress Start Server
+      #   uses: cypress-io/github-action@v6
+      #   with:
+      #     start: npm start
+      #     working-directory: server
+      #   env:
+      #     DEBUG: '@cypress/github-action'
+      # - name: Cypress Start Web
+      #   uses: cypress-io/github-action@v6
+      #   with:
+      #     start: npm start
+      #     working-directory: web
+      #   env:
+      #     DEBUG: '@cypress/github-action'
+      - name: Cypress Start Servers
         uses: cypress-io/github-action@v6
         with:
-          start: npm start
-          working-directory: web
+          start: npm run server, npm run web
+          working-directory: .
         env:
           DEBUG: '@cypress/github-action'
-      
