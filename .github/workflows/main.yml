@@ -29,4 +29,5 @@ jobs:
           command: npx cypress run
           browser: chrome
           install: false
+          baseUrl: 'http://127.0.0.1:3000'
       
