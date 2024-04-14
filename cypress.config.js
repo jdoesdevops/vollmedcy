@@ -8,8 +8,8 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    apiBaseUrl: 'http://[::1]:8080',
-    baseUrl: 'http://[::1]:3000',
+    apiBaseUrl: 'http://localhost:8080',
+    baseUrl: 'http://localhost:3000',
     video: true,
     reporter: 'mochawesome',
     reporterOptions: {
