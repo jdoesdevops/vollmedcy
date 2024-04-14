@@ -46,7 +46,6 @@ jobs:
     steps:
       - name: Install Dependencies
         run: npm install
-        working-directory: .
       - name: Wait for servers
         run: sleep 300
       - name: Checkout
