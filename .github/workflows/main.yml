@@ -35,7 +35,7 @@ jobs:
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
-          wait-on: 'npx wait-on --timeout 60000 http://localhost:3000'
+          wait-on: 'npx wait-on --timeout 60000 http://[::1]:3000'
           browser: chrome
           install: false
         env:
