@@ -10,8 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:browser:edge": "cypress run --browser edge",
     "test:tablet": "cypress run --config viewportWidth=768 viewportHeight=1024",
-    "server": "./scripts/server.sh",
-    "web": "./scripts/web.sh"
+    "server": "./server.sh",
+    "web": "./web.sh"
   },
   "devDependencies": {
     "cypress": "^13.7.3",
