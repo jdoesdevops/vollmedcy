@@ -20,6 +20,7 @@ jobs:
         with:
           start: npm start
           working-directory: web
+          runTests: false
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
