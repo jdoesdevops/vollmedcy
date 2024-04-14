@@ -44,12 +44,12 @@ jobs:
       fail-fast: false
     timeout-minutes: 10
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Install Dependencies
         run: npm install
       - name: Wait for servers
         run: sleep 300
-      - name: Checkout
-        uses: actions/checkout@v4
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
