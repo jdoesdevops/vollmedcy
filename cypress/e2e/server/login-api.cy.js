@@ -5,68 +5,28 @@ describe('testes em API', () => {
 
         // })
         it('get Servidor',() =>{
-            cy.request('/clinica').then((response) =>{
+            cy.request('http://localhost:8080/clinica').then((response) =>{
                 expect(response.status).to.eq(200)
             })
 
         })
 
-        it('Deve logar com sucesso na API e armazenar o token', () => {
-
-            let token = ""
-            // Dados de login
-            const reqBody = {
-                "email": "clinica@gmail.com",
-                "senha": "4321"
-            }
-        
-            // Requisição para a API de login
-            cy.request({
-            method: 'POST',
-            url: '/auth/login', // Substitua pela URL da sua API de login
-            body: reqBody,
-            timeout: 600000
+        it('get Servidor render',() =>{
+            cy.request('https://volserver.onrender.com/clinica').then((response) =>{
+                expect(response.status).to.eq(200)
             })
-            .then((response) => {
-                // Validação do status da resposta
-                expect(response.status).to.equal(200);
-                // Armazenamento do token
-                token = response.body.token
-            });
-        });
-        });
 
-        // it('loginApi',()=>{
-        //   const reqBody = {
-        //       "email": "clinica@gmail.com",
-        //       "senha": "4321"
-        //   }
-        //     cy.request({
-        //         method: 'POST',
-        //         body: reqBody,
-        //         url: '/auth/login',
-        //         timeout: 600000,
-        //   // failOnStatusCode: false
-        
-        //     }).then(response =>{
-        //         expect(response.status).to.eq(200);
-        //         expect(response.body.auth).to.be.true;
-        //         expect(response.body.rota).to.eq('/clinica');
-        //         expect(response.body.token).to.exist;
-        //       //   cy.wrap(response.body.token).as('token');
-          
-        //     })
-        
-        // })
+        })
+
 
         it('Cadastra clinica',()=>{
             const reqBody = 
                 {
-                    "planoDeSaudeAceitos":[1,2,3,4],
-                    "email":"clinica@gmail.com",
-                    "nome":"Clinica de Todos",
-                    "senha":"4321",
-                    "endereco": {
+                    planoDeSaudeAceitos:[1,2,3,4],
+                    email:"clinica@gmail.com",
+                    nome:"Clinica de Todos",
+                    senha:"4321",
+                    endereco: {
                         "cep": 76541321,
                         "rua": "Rua 45",
                         "numero": 2,
@@ -76,18 +36,48 @@ describe('testes em API', () => {
                 }
               cy.request({
                   method: 'POST',
-                  url: '/clinica',
+                  url: 'http://localhost:8080/clinica',
                   body: reqBody,
-                  'auth': {
-                    'bearer': `${token}`
-                  },
-                  timeout: 600000,
+                // failOnStatusCode: false
+          
               }).then(response =>{
                   expect(response.status).to.eq(200)
                   expect(response.body.id).to.exist;            
               })
           
           })
+
+        it('loginApi',()=>{
+            const reqBody = {
+                "email": "clinica@gmail.com",
+                "senha": "4321"
+            }
+
+        //     const Headers = ['Content-Type', 'Authorization', 'Accept'
+        // ]
+              cy.request({
+                  method: 'POST',
+                  url: 'https://volserver.onrender.com/auth/login',
+                //   headers: Headers,
+                  body: reqBody,
+            
+            // failOnStatusCode: false
+          
+              }
+          
+        
+        ).then(response =>{
+                  expect(response.status).to.eq(200);
+                  expect(response.body.auth).to.be.true;
+                  expect(response.body.rota).to.eq('/clinica');
+                  expect(response.body.token).to.exist;
+                //   cy.wrap(response.body.token).as('token');
+            
+              })
+          
+          })
+          
+         
 
         // it('GET via url front para teste em resposta da home', () => {
         //     cy.request('GET', '/', { email: "clinica@gmail.com", senha: "4321" 
@@ -125,3 +115,5 @@ describe('testes em API', () => {
     //     })
 
     // })
+
+})

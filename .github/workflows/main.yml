@@ -22,34 +22,35 @@ jobs:
         uses: adambirds/docker-compose-action@v1.3.0
         with:
           compose-file: "./docker-compose.yml"
+
+      - name: Cypress Run Tests Server & Web
+        uses: cypress-io/github-action@v6
+        with:
+          wait-on: 'http://localhost:3000, http://localhost:8080'
+    env:
+      browser: chrome
+      DEBUG: '@cypress/github-action'
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Cypress Run Tests Server
-        uses: cypress-io/github-action@v6
-        with:
-          config: baseUrl=http://localhost:8080
-          spec: cypress/e2e/server/**.cy.js
-          working-directory: .
-          wait-on: 'http://localhost:3000 ,http://localhost:8080'
-        env:
-          DEBUG: '@cypress/github-action'
-          email: 'clinica@gmail.com'
-          senha: '4321'
-          user: 'clinica@gmail.com'
-          password: '4321'
-          api_login: 'http://localhost:8080/auth/login'
-          api_clinica: 'http://localhost:8080/clinica'
-          api_especialista: 'http://localhost:8080/especialista'
+      # - name: Cypress Run Tests Server
+      #   uses: cypress-io/github-action@v6
+      #   with:
+      #     config: baseUrl=http://localhost:8080
+      #     spec: cypress/e2e/server/**.cy.js
+      #     wait-on: 'http://localhost:3000, http://localhost:8080'
+      #   env:
+      #     DEBUG: '@cypress/github-action'
           
-      - name: Cypress Run Tests Web
-        uses: cypress-io/github-action@v6
-        with:
-          start: npm run start-web
-          config: baseUrl=http://localhost:3000
-          spec: cypress/e2e/web/**.cy.js
-          working-directory: .
-          browser: chrome
-        env:
-          DEBUG: '@cypress/github-action'
+      # - name: Cypress Run Tests Web
+      #   uses: cypress-io/github-action@v6
+      #   with:
+      #     config: baseUrl=http://localhost:3000
+      #     spec: cypress/e2e/web/**.cy.js
+      #     wait-on: 'http://localhost:3000, http://localhost:8080'
+      #   env:
+      #     browser: chrome
+      #     DEBUG: '@cypress/github-action'
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
 
