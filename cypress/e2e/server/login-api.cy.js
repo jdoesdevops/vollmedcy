@@ -125,5 +125,3 @@ describe('testes em API', () => {
     //     })
 
     // })
-
-})
