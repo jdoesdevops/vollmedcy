@@ -5,7 +5,7 @@ describe('testes em API', () => {
 
         // })
         it('get Servidor',() =>{
-            cy.request('http://localhost:8080/clinica').then((response) =>{
+            cy.request('/clinica').then((response) =>{
                 expect(response.status).to.eq(200)
             })
 
@@ -19,7 +19,7 @@ describe('testes em API', () => {
             cy.request({
                 method: 'POST',
                 body: reqBody,
-                url: 'http://localhost:8080/auth/login',
+                url: '/auth/login',
                 'auth': {
                   'email': 'clinica@gmail.com',
                   'senha': '4321'
