@@ -25,6 +25,13 @@ jobs:
           working-directory: .
         env:
           DEBUG: '@cypress/github-action'
+          email: 'clinica@gmail.com'
+          senha: '4321'
+          api_login: 'http://localhost:8080/auth/login'
+          api_clinica: 'http://localhost:8080/clinica'
+          api_especialista: 'http://localhost:8080/especialista'
+          requestMode: true
+          
       - name: Cypress Run Tests Web
         uses: cypress-io/github-action@v6
         with:
