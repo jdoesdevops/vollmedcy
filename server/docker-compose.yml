@@ -30,8 +30,7 @@ services:
       - my-networks
   
   e2e:
-    image: cypress
-    build: ../cypress/e2e
+    image: cypress/included
     container_name: cypress
     depends_on:
       - server
