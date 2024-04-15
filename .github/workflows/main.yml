@@ -6,54 +6,96 @@ on:
       - jdoesdevops-test
 
 jobs:
-  server-tests:
+  build-images:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-    continue-on-error: true
     steps:
-      - name: Config ipv4
-        run: export NODE_OPTIONS=--dns-result-order=ipv4first
       - name: Checkout
         uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: adrielcodeco/docker-compose-run-action@v1
         with:
-          node-version: 18
-      - name: Install Dependencies
-        run: |
-          npm prune
-          npm install
+          compose-file: './docker-compose.yml'
+          service: teste
       - name: Cypress Start Server
         uses: cypress-io/github-action@v6
         with:
-          start: npm start
-          working-directory: server
-        env:
-          DEBUG: '@cypress/github-action'
-  
-  web-tests:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-    continue-on-error: true
-    needs: server-tests
-    steps:
-      - name: Config ipv4
-        run: export NODE_OPTIONS=--dns-result-order=ipv4first
-      - name: Checkout
-        uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-      - name: Install Dependencies
-        run: |
-          npm prune
-          npm install
-      - name: Cypress Start Web
-        uses: cypress-io/github-action@v6
-        with:
-          start: npm start
-          working-directory: web
+          working-directory: .
           browser: chrome
         env:
           DEBUG: '@cypress/github-action'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# name: Cypress Tests
+
+# on:
+#   push:
+#     branches:
+#       - jdoesdevops-test
+
+# jobs:
+#   server-tests:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       fail-fast: false
+#     continue-on-error: true
+#     steps:
+#       - name: Config ipv4
+#         run: export NODE_OPTIONS=--dns-result-order=ipv4first
+#       - name: Checkout
+#         uses: actions/checkout@v4
+#       - uses: actions/setup-node@v4
+#         with:
+#           node-version: 18
+#       - name: Install Dependencies
+#         run: |
+#           npm prune
+#           npm install
+      # - name: Cypress Start Server
+      #   uses: cypress-io/github-action@v6
+      #   with:
+      #     start: npm start
+      #     working-directory: server
+      #   env:
+      #     DEBUG: '@cypress/github-action'
+  
+#   web-tests:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       fail-fast: false
+#     continue-on-error: true
+#     needs: server-tests
+#     steps:
+#       - name: Config ipv4
+#         run: export NODE_OPTIONS=--dns-result-order=ipv4first
+#       - name: Checkout
+#         uses: actions/checkout@v4
+#       - uses: actions/setup-node@v4
+#         with:
+#           node-version: 18
+#       - name: Install Dependencies
+#         run: |
+#           npm prune
+#           npm install
+#       - name: Cypress Start Web
+#         uses: cypress-io/github-action@v6
+#         with:
+#           start: npm start
+#           working-directory: web
+#           browser: chrome
+#         env:
+#           DEBUG: '@cypress/github-action'
