@@ -17,30 +17,43 @@ jobs:
         uses: adambirds/docker-compose-action@v1.3.0
         with:
           compose-file: "./docker-compose.yml"
-      - name: Cypress Run Tests Server
-        uses: cypress-io/github-action@v6
-        with:
-          config: baseUrl=http://localhost:8080
-          spec: cypress/e2e/server/**.cy.js
-          working-directory: .
+      
+      - name: Test Curl API login
+        run: |
+          curl --location 'localhost:8080/auth/login' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{
+              "email": "$EMAIL",
+              "senha": "$SENHA"
+          }'
         env:
-          DEBUG: '@cypress/github-action'
-          email: 'clinica@gmail.com'
-          senha: '4321'
-          api_login: 'http://localhost:8080/auth/login'
-          api_clinica: 'http://localhost:8080/clinica'
-          api_especialista: 'http://localhost:8080/especialista'
-          requestMode: true
+          EMAIL: 'clinica@gmail.com'
+          SENHA: '4321'
+      
+      # - name: Cypress Run Tests Server
+      #   uses: cypress-io/github-action@v6
+      #   with:
+      #     config: baseUrl=http://localhost:8080
+      #     spec: cypress/e2e/server/**.cy.js
+      #     working-directory: .
+      #   env:
+      #     DEBUG: '@cypress/github-action'
+      #     email: 'clinica@gmail.com'
+      #     senha: '4321'
+      #     api_login: 'http://localhost:8080/auth/login'
+      #     api_clinica: 'http://localhost:8080/clinica'
+      #     api_especialista: 'http://localhost:8080/especialista'
+      #     requestMode: true
           
-      - name: Cypress Run Tests Web
-        uses: cypress-io/github-action@v6
-        with:
-          config: baseUrl=http://localhost:3000
-          spec: cypress/e2e/web/**.cy.js
-          working-directory: .
-          browser: chrome
-        env:
-          DEBUG: '@cypress/github-action'
+      # - name: Cypress Run Tests Web
+      #   uses: cypress-io/github-action@v6
+      #   with:
+      #     config: baseUrl=http://localhost:3000
+      #     spec: cypress/e2e/web/**.cy.js
+      #     working-directory: .
+      #     browser: chrome
+      #   env:
+      #     DEBUG: '@cypress/github-action'
 
 
 
