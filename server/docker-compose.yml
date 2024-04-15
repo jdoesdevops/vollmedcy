@@ -13,16 +13,32 @@ services:
     networks:
       - my-networks
 
-  app:
+  server:
     build: .
     ports:
-      - "3000:3000"
+      - "8080:8080"
+    environment:
+      DB_HOST: db
+      email: "clinica@gmail.com"
+      senha: "4321"
+      api_login: "http://localhost:8080/auth/login"
+      api_clinica: "http://localhost:8080/clinica"
+      api_especialista: "http://localhost:8080/especialista"
+      requestMode: true
     depends_on:
       - db
-    environment:
-      - DB_HOST=db
     networks:
       - my-networks
+  
+  e2e:
+    image: cypress
+    build: ../cypress/e2e
+    container_name: cypress
+    depends_on:
+      - server
+    environment:
+      - CYPRESS_baseUrl=http://localhost:8080
+    command: npx cypress run
 
 networks:
   my-networks:

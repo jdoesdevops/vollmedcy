@@ -11,28 +11,22 @@ jobs:
     strategy:
       fail-fast: false
     steps:
+      - name: Setup Node and NPM
+        uses: actions/setup-node@v4
+        with: 
+          node-version: 20
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Start Servers
+      
+      - name: Test Server
         uses: adambirds/docker-compose-action@v1.3.0
         with:
-          compose-file: "./docker-compose.yml"
-      
-      - name: Test Curl API login
-        run: |
-          curl -XPOST --location 'localhost:8080/auth/login' \
-          --header 'Content-Type: application/json' \
-          --data-raw '{
-              "email": "$EMAIL",
-              "senha": "$SENHA"
-          }'
-        env:
-          EMAIL: 'clinica@gmail.com'
-          SENHA: '4321'
+          compose-file: "./server/docker-compose.yml"
       
       # - name: Cypress Run Tests Server
       #   uses: cypress-io/github-action@v6
       #   with:
+      #     start: 
       #     config: baseUrl=http://localhost:8080
       #     spec: cypress/e2e/server/**.cy.js
       #     working-directory: .
