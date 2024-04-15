@@ -11,32 +11,53 @@ describe('testes em API', () => {
 
         })
 
-        it('loginApi',()=>{
-          const reqBody = {
-              "email": "clinica@gmail.com",
-              "senha": "4321"
-          }
+        it('Deve logar com sucesso na API e armazenar o token', () => {
+
+            let token = ""
+            // Dados de login
+            const reqBody = {
+                "email": "clinica@gmail.com",
+                "senha": "4321"
+            }
+        
+            // Requisição para a API de login
             cy.request({
-                method: 'POST',
-                body: reqBody,
-                url: '/auth/login',
-                'auth': {
-                  'user': 'clinica@gmail.com',
-                  'pass': '4321'
-                },
-                timeout: 600000,
-          // failOnStatusCode: false
-        
-            }).then(response =>{
-                expect(response.status).to.eq(200);
-                expect(response.body.auth).to.be.true;
-                expect(response.body.rota).to.eq('/clinica');
-                expect(response.body.token).to.exist;
-              //   cy.wrap(response.body.token).as('token');
-          
+            method: 'POST',
+            url: '/auth/login', // Substitua pela URL da sua API de login
+            body: reqBody,
+            timeout: 600000
             })
+            .then((response) => {
+                // Validação do status da resposta
+                expect(response.status).to.equal(200);
+                // Armazenamento do token
+                token = response.body.token
+            });
+        });
+        });
+
+        // it('loginApi',()=>{
+        //   const reqBody = {
+        //       "email": "clinica@gmail.com",
+        //       "senha": "4321"
+        //   }
+        //     cy.request({
+        //         method: 'POST',
+        //         body: reqBody,
+        //         url: '/auth/login',
+        //         timeout: 600000,
+        //   // failOnStatusCode: false
         
-        })
+        //     }).then(response =>{
+        //         expect(response.status).to.eq(200);
+        //         expect(response.body.auth).to.be.true;
+        //         expect(response.body.rota).to.eq('/clinica');
+        //         expect(response.body.token).to.exist;
+        //       //   cy.wrap(response.body.token).as('token');
+          
+        //     })
+        
+        // })
 
         it('Cadastra clinica',()=>{
             const reqBody = 
@@ -58,8 +79,7 @@ describe('testes em API', () => {
                   url: '/clinica',
                   body: reqBody,
                   'auth': {
-                    'user': 'clinica@gmail.com',
-                    'pass': '4321'
+                    'bearer': `${token}`
                   },
                   timeout: 600000,
               }).then(response =>{
