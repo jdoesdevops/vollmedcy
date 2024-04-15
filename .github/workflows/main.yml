@@ -21,6 +21,7 @@ jobs:
       - name: Cypress Run Tests Server
         uses: cypress-io/github-action@v6
         with:
+          start:
           config: baseUrl=http://localhost:8080
           spec: cypress/e2e/server/**.cy.js
           working-directory: .
@@ -35,6 +36,7 @@ jobs:
       - name: Cypress Run Tests Web
         uses: cypress-io/github-action@v6
         with:
+          start:
           config: baseUrl=http://localhost:3000
           spec: cypress/e2e/web/**.cy.js
           working-directory: .
