@@ -21,8 +21,8 @@ describe('testes em API', () => {
                 body: reqBody,
                 url: '/auth/login',
                 'auth': {
-                  'email': 'clinica@gmail.com',
-                  'senha': '4321'
+                  'user': 'clinica@gmail.com',
+                  'pass': '4321'
                 },
                 timeout: 600000,
           // failOnStatusCode: false
@@ -58,8 +58,8 @@ describe('testes em API', () => {
                   url: '/clinica',
                   body: reqBody,
                   'auth': {
-                    'email': 'clinica@gmail.com',
-                    'senha': '4321'
+                    'user': 'clinica@gmail.com',
+                    'pass': '4321'
                   },
                   timeout: 600000,
               }).then(response =>{
