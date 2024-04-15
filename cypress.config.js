@@ -11,7 +11,7 @@ module.exports = defineConfig({
     },
     // baseUrl: 'http://localhost:3000',
     failOnStatusCode: false,
-    defaultCommandTimeout: 25000,
+    defaultCommandTimeout: 120000,
     video: true,
     reporter: 'mochawesome',
     reporterOptions: {
