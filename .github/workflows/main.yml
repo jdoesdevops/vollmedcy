@@ -33,6 +33,7 @@ jobs:
           DEBUG: '@cypress/github-action'
           email: 'clinica@gmail.com'
           senha: '4321'
+          user: 'clinica@gmail.com'
           password: '4321'
           api_login: 'http://127.0.0.1:8080/auth/login'
           api_clinica: 'http://127.0.0.1:8080/clinica'
