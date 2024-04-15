@@ -18,17 +18,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
-      - name: Start Servers
-        uses: adambirds/docker-compose-action@v1.3.0
-        with:
-          compose-file: "./docker-compose.yml"
-      
       - name: Cypress Run Tests Server
         uses: cypress-io/github-action@v6
         with:
           project: ./server
           config: baseUrl=http://localhost:8080
-          spec: cypress/e2e/server/**.cy.js
+          spec: ../cypress/e2e/server/**.cy.js
         env:
           DEBUG: '@cypress/github-action'
           email: 'clinica@gmail.com'

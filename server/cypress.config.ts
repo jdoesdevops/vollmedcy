@@ -10,7 +10,6 @@ export default defineConfig({
       // implement node event listeners here
     },
     baseUrl: 'http://localhost:8080',
-    defaultCommandTimeout: 25000,
     video: true,
     reporter: 'mochawesome',
     reporterOptions: {
@@ -20,14 +19,6 @@ export default defineConfig({
       html: true,
       json: false,
       timestamp: "mmddyyyy_HHMMss"
-    },
-    env: {
-      "email": "clinica@gmail.com",
-      "senha": "4321",
-      "api_login": "http://localhost:8080/auth/login",
-      "api_clinica": "http://localhost:8080/clinica",
-      "api_especialista": "http://localhost:8080/especialista",
-      "requestMode": true
     },
     projectId: "x3bmp5"
 
