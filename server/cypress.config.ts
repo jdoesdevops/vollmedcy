@@ -9,7 +9,7 @@ export default defineConfig({
     video: true,
     reporter: 'mochawesome',
     reporterOptions: {
-      reportDir: 'cypress/report/mochawesome-report',
+      reportDir: '../cypress/report/mochawesome-report',
       toConsole: true,
       overwrite: false,
       html: true,
