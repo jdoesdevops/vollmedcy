@@ -11,6 +11,32 @@ describe('testes em API', () => {
 
         })
 
+        it('loginApi',()=>{
+          const reqBody = {
+              "email": "clinica@gmail.com",
+              "senha": "4321"
+          }
+            cy.request({
+                method: 'POST',
+                body: reqBody,
+                url: 'http://localhost:8080/auth/login',
+                'auth': {
+                  'email': 'clinica@gmail.com',
+                  'senha': '4321'
+                },
+                timeout: 600000,
+          // failOnStatusCode: false
+        
+            }).then(response =>{
+                expect(response.status).to.eq(200);
+                expect(response.body.auth).to.be.true;
+                expect(response.body.rota).to.eq('/clinica');
+                expect(response.body.token).to.exist;
+              //   cy.wrap(response.body.token).as('token');
+          
+            })
+        
+        })
 
         it('Cadastra clinica',()=>{
             const reqBody = 
@@ -29,48 +55,19 @@ describe('testes em API', () => {
                 }
               cy.request({
                   method: 'POST',
-                  url: 'http://localhost:8080/clinica',
+                  url: '/clinica',
                   body: reqBody,
                   'auth': {
                     'email': 'clinica@gmail.com',
                     'senha': '4321'
                   },
-            // failOnStatusCode: false
-          
+                  timeout: 600000,
               }).then(response =>{
                   expect(response.status).to.eq(200)
                   expect(response.body.id).to.exist;            
               })
           
           })
-
-        it('loginApi',()=>{
-            const reqBody = {
-                "email": "clinica@gmail.com",
-                "senha": "4321"
-            }
-              cy.request({
-                  method: 'POST',
-                  body: reqBody,
-                  url: 'http://localhost:8080/auth/login',
-                  'auth': {
-                    'email': 'clinica@gmail.com',
-                    'senha': '4321'
-                  },
-                  timeout: 600000,
-            // failOnStatusCode: false
-          
-              }).then(response =>{
-                  expect(response.status).to.eq(200);
-                  expect(response.body.auth).to.be.true;
-                  expect(response.body.rota).to.eq('/clinica');
-                  expect(response.body.token).to.exist;
-                //   cy.wrap(response.body.token).as('token');
-            
-              })
-          
-          })
-
 
         // it('GET via url front para teste em resposta da home', () => {
         //     cy.request('GET', '/', { email: "clinica@gmail.com", senha: "4321" 
