@@ -32,7 +32,6 @@ jobs:
       - name: Cypress Start Web
         uses: cypress-io/github-action@v6
         with:
-          install: true
           working-directory: web
           browser: chrome
         env:
