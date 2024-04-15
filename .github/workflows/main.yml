@@ -13,10 +13,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - uses: adrielcodeco/docker-compose-run-action@v1
+      - uses: adambirds/docker-compose-action@v1.3.0
         with:
-          compose-file: './docker-compose.yml'
-          service: teste
+          compose-file: "./docker-compose.yml"
       - name: Cypress Start Server
         uses: cypress-io/github-action@v6
         with:
