@@ -24,6 +24,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
         throw new AppError('Senha incorreta!', 401)
       }
 
+      //process.env.SECRET
       const token = jwt.sign({ id, role }, process.env.SECRET, {
         expiresIn: 86400
       }) // expira em 24 horas

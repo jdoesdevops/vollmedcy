@@ -9,8 +9,8 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    apiBaseUrl: 'http://localhost:8080',
-    baseUrl: 'http://localhost:3000',
+    // baseUrl: 'http://localhost:3000',
+    defaultCommandTimeout: 120000,
     video: true,
     reporter: 'mochawesome',
     reporterOptions: {

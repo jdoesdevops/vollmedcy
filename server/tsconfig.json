@@ -5,7 +5,6 @@
 			"ES6",
 			"dom"
 		],
-		"types": ["cypress", "node"],
 		"rootDirs": [
 			"./src"
 		],
@@ -19,12 +18,9 @@
 		"strictNullChecks": true,
 	},
 	"include": [
-		"./src/**/*",
-		"**/*.ts"
+		"./src/**/*"
 	],
 	"exclude": [
-		"node_modules",
-		"cypress.config.ts",
-		"cypress"
+		"node_modules"
 	],
 }
