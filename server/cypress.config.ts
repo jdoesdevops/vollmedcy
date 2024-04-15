@@ -5,11 +5,10 @@ import { defineConfig } from 'cypress'
 
 export default defineConfig({
   e2e: {
-    // supportFile: false,
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
-    },
+    supportFile: '../cypress/support/e2e.ts',
+    setupNodeEvents(on, config) {},
     baseUrl: 'http://localhost:8080',
+    defaultCommandTimeout: 25000,
     video: true,
     reporter: 'mochawesome',
     reporterOptions: {
