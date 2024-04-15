@@ -20,7 +20,7 @@ jobs:
       
       - name: Test Curl API login
         run: |
-          curl --location 'localhost:8080/auth/login' \
+          curl -XPOST --location 'localhost:8080/auth/login' \
           --header 'Content-Type: application/json' \
           --data-raw '{
               "email": "$EMAIL",
