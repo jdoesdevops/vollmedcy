@@ -22,12 +22,22 @@ jobs:
         run: |
           npm prune
           npm install
-      - name: Cypress Start Servers
+      - name: Cypress Start Server
         uses: cypress-io/github-action@v6
         with:
-          start: npm run setup
-          working-directory: .
-          wait-on: 'http://localhost:8080, http://localhost:3000'
-          wait-on-timeout: 120
+          start: npm start
+          working-directory: server
+          wait-on: 'http://localhost:8080'
+          wait-on-timeout: 60
+        env:
+          DEBUG: '@cypress/github-action'
+      - name: Cypress Start Web
+        uses: cypress-io/github-action@v6
+        with:
+          start: npm start
+          working-directory: web
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 60
+          browser: chrome
         env:
           DEBUG: '@cypress/github-action'
