@@ -26,10 +26,9 @@ jobs:
       - name: Cypress Run Tests Server
         uses: cypress-io/github-action@v6
         with:
-          start: 
+          project: ./server
           config: baseUrl=http://localhost:8080
           spec: cypress/e2e/server/**.cy.js
-          working-directory: .
         env:
           DEBUG: '@cypress/github-action'
           email: 'clinica@gmail.com'
