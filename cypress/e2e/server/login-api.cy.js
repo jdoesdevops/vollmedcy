@@ -1,52 +1,37 @@
-// describe('testes em API', () => {
-//     context('Testes em rotas com usuário autorizado', () => {
-//         beforeEach(() => {
-//             cy.loginApi(Cypress.env('email'), Cypress.env('senha'))
+describe('testes em API', () => {
+    context('Testes em rotas com usuário autorizado', () => {
+        it('GET via url front para teste em resposta da home', () => {
+            cy.loginApi('clinica@gmail.com', '4321')
+            cy.request('GET', '/',
+            ).should((response) => {
+                expect(response.status).to.eq(200)
+            })
+        })
 
-//         })
-//         it('GET via url front para teste em resposta da home', () => {
-//             cy.request('GET', '/', { email: "clinica@gmail.com", senha: String(4321) 
+        it('Deve verificar se o token de autenticação é retornado após login via POST na API', () => {
+            cy.get('@token').should('exist');
+        })
+    });
 
-//             }).should((response) => {
-//                 expect(response.status).to.eq(200)
-//             })
-//         })
-
-//         it('Deve verificar se o token de autenticação é retornado após login via POST na API', () => {
-//             cy.get('@token').should('exist');
-//         })
-//     });
-
-//     context('Validações em respostas da API', ()=>{
-//         beforeEach(() =>{
-//             cy.loginApi(Cypress.env('email'), Cypress.env('senha'))
-//         })
-
-//         it('Requisição incorreta em criação de especialista', ()=>{
-//             cy.request({
-//                 method: 'POST',
-//                 url: Cypress.env('api_clinica'),
-//                 body: {
-//                     nome: 'Camila',
-//                     email: 'camila123@exemplo',
-//                 },
-//             failOnStatusCode: false
+    context('Validações em respostas da API', ()=>{
+      it('Requisição incorreta em criação de especialista', ()=>{
+            cy.loginApi('clinica@gmail.com', '4321')
+            cy.request({
+                method: 'POST',
+                url: Cypress.env('api_clinica'),
+                body: {
+                    nome: 'Camila',
+                    email: 'camila123@exemplo',
+                },
+            failOnStatusCode: false
             
-//             }).then((response)=>{
-//                 expect(response.status).to.eq(500)
-//                 expect(response.body).to.have.property('message')
-//             })
+            }).then((response)=>{
+                expect(response.status).to.eq(500)
+                expect(response.body).to.have.property('message')
+            })
 
-//         })
+        })
 
-//     })
+    })
 
-// })
-
-describe('Login API', () => {
-  it('get Servidor',() =>{
-    cy.request('http://localhost:8080').then((response) =>{
-        expect(response.status).to.eq(200)
 })
-})
-  });

@@ -34,8 +34,8 @@ Cypress.Commands.add('loginApi',(email, senha)=>{
         method: 'POST',
         url: 'http://localhost:8080/auth/login',
         body: {
-            email: email,
-            senha: senha.toString()
+            email,
+            senha
         }
 
     }).then(response =>{
