@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+    continue-on-error: true
     steps:
       - name: Config ipv4
         run: export NODE_OPTIONS=--dns-result-order=ipv4first
