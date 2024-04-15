@@ -56,8 +56,7 @@ rotaAuth(app)
 app.use(errorMiddleware)
 
 // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-app.set('port', 9090);
-app.listen('port', () => { console.log(`server running on port 9090`) }
+app.listen('8080', () => { console.log(`server running on port 8080`) }
 )
 
 export default app
