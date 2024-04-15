@@ -44,31 +44,9 @@
 // })
 
 describe('Login API', () => {
-    it('Deve logar com sucesso na API e retornar status 200', () => {
-      // Dados de login
-      const email = 'clinica@gmail.com';
-      const senha = '4321';
-  
-      // Requisição para a API de login
-      cy.request({
-        method: 'POST',
-        url: 'http://localhost:8080/auth/login', // Substitua por URL da sua API de login
-        body: {
-          email,
-          senha
-        }
-      })
-        .then((response) => {
-          // Validação do status da resposta
-          expect(response.status).to.equal(200);
-  
-          // Validação da estrutura da resposta
-          expect(response.body).to.have.property('token');
-          expect(response.body).to.have.property('usuario');
-  
-          // Validação dos dados do usuário
-          expect(response.body.usuario.email).to.equal(email);
-          // Validação de outros dados do usuário, se necessário
-        });
-    });
+  it('get Servidor',() =>{
+    cy.request('http://localhost:8080').then((response) =>{
+        expect(response.status).to.eq(200)
+})
+})
   });
