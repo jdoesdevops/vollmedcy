@@ -21,9 +21,9 @@ jobs:
       - name: Cypress Run Tests Server
         uses: cypress-io/github-action@v6
         with:
-          project: ./server
           config: baseUrl=http://localhost:8080
           spec: ../cypress/e2e/server/**.cy.js
+          working-directory: .
         env:
           DEBUG: '@cypress/github-action'
           email: 'clinica@gmail.com'
@@ -31,7 +31,6 @@ jobs:
           api_login: 'http://localhost:8080/auth/login'
           api_clinica: 'http://localhost:8080/clinica'
           api_especialista: 'http://localhost:8080/especialista'
-          requestMode: true
           
       - name: Cypress Run Tests Web
         uses: cypress-io/github-action@v6
