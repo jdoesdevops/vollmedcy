@@ -36,7 +36,7 @@ Cypress.Commands.add('loginApi',(email, senha)=>{
         url: Cypress.env('api_login'),
         body: {
             email:email,
-            senha: senha
+            senha: String(senha)
         }
 
     }).then(response =>{
