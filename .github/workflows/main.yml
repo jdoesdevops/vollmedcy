@@ -22,7 +22,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           config: baseUrl=http://localhost:8080
-          spec: ../cypress/e2e/server/**.cy.js
+          spec: cypress/e2e/server/**.cy.js
           working-directory: .
         env:
           DEBUG: '@cypress/github-action'
