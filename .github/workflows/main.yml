@@ -17,11 +17,36 @@ jobs:
           node-version: 20
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Start Servers
-        uses: adambirds/docker-compose-action@v1.3.0
+      
+      - name: Install
+        run: npm install
+      
+      - name: Checkout Server
+        uses: actions/checkout@v4
         with:
-          compose-file: "./docker-compose.yml"
+          path: server
+
+      - name: Install Server
+        run: |
+          cd server
+          npm install
+          npm start &
+        working-directory: server
+
+      - name: Checkout Web
+        uses: actions/checkout@v4
+        with:
+          path: web
+      
+      - name: Install Web
+        run: |
+          cd web
+          npm install
+          npm start &
+        working-directory: web
+      
+      - name: Configurar Variável de Ambiente
+        run: echo "DB_ENV=${{ secrets.DB_ENV }}" > server/.env
 
       - name: Cypress Run Tests Server & Web
         uses: cypress-io/github-action@v6
