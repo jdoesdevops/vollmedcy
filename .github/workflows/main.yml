@@ -13,12 +13,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - uses: adambirds/docker-compose-action@v1.3.0
+      - name: Start Servers
+        uses: adambirds/docker-compose-action@v1.3.0
         with:
           compose-file: "./docker-compose.yml"
-      - name: Cypress Start Server
+      - name: Cypress Run Tests Server
         uses: cypress-io/github-action@v6
         with:
+          config: baseUrl=http://localhost:8080
+          working-directory: .
+        env:
+          DEBUG: '@cypress/github-action'
+      - name: Cypress Run Tests Web
+        uses: cypress-io/github-action@v6
+        with:
+          config: baseUrl=http://localhost:3000
           working-directory: .
           browser: chrome
         env:
