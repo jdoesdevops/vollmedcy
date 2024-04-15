@@ -39,6 +39,8 @@ services:
     environment:
       - CYPRESS_baseUrl=http://localhost:8080
     command: npx cypress run
+    networks:
+      - my-networks
 
 networks:
   my-networks:
